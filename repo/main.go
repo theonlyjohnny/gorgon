@@ -19,12 +19,12 @@ type dockerfileGenerator func(string) *string
 
 //GetContainersFromGitUser returns all the Git Repos associated to the provided accesToken
 //in the form of Containers
-func GetContainersFromGitUser(accessToken string) ([]common.Container, error) {
+func GetContainersFromGitUser(accessToken string, progressChan chan<- common.Progress) ([]common.Container, error) {
 	client := newAuthedGitClient(accessToken)
-	return getContainers(client)
+	return getContainers(client, progressChan)
 }
 
-func getContainers(client *github.Client) ([]common.Container, error) {
+func getContainers(client *github.Client, progressChan chan<- common.Progress) ([]common.Container, error) {
 	var allGitRepos []*github.Repository
 	var containers []common.Container
 	var operated int
@@ -36,6 +36,10 @@ func getContainers(client *github.Client) ([]common.Container, error) {
 	}
 
 	repoCount := len(allGitRepos)
+	progressChan <- common.Progress{
+		Total:   repoCount,
+		Current: 0,
+	}
 
 	containersChan := make(chan common.Container, repoCount)
 
@@ -48,7 +52,11 @@ func getContainers(client *github.Client) ([]common.Container, error) {
 			containers = append(containers, container)
 		}
 		operated++
-		log.Debugf("Operated on %d/%d", operated, repoCount)
+		// log.Debugf("Operated on %d/%d", operated, repoCount)
+		progressChan <- common.Progress{
+			Total:   repoCount,
+			Current: operated,
+		}
 		if operated == repoCount {
 			close(containersChan)
 		}
