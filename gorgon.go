@@ -4,9 +4,9 @@ import (
 	"os"
 
 	"github.com/schollz/progressbar"
-	"github.com/theonlyjohnny/manticore/common"
-	logPkg "github.com/theonlyjohnny/manticore/log"
-	"github.com/theonlyjohnny/manticore/repo"
+	"github.com/theonlyjohnny/gorgon/common"
+	logPkg "github.com/theonlyjohnny/gorgon/log"
+	"github.com/theonlyjohnny/gorgon/repo"
 )
 
 var (

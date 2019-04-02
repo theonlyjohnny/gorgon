@@ -12,7 +12,7 @@ var Log *logger.Logger
 
 func setupLogger() error {
 	opts := logger.Config{
-		AppName:    "manticore",
+		AppName:    "gorgon",
 		LogLevel:   "debug",
 		LogConsole: true,
 		LogSyslog:  nil,

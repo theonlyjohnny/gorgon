@@ -35,3 +35,7 @@
 
 [[constraint]]
   name = "golang.org/x/oauth2"
+
+[[constraint]]
+  name = "github.com/docker/docker"
+  version = "1.13.1"

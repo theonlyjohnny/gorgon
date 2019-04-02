@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/google/go-github/github"
-	"github.com/theonlyjohnny/manticore/common"
-	logPkg "github.com/theonlyjohnny/manticore/log"
+	"github.com/theonlyjohnny/gorgon/common"
+	logPkg "github.com/theonlyjohnny/gorgon/log"
 )
 
 var (
